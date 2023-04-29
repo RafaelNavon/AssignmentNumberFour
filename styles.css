@@ -23,13 +23,19 @@ button {
     font-size: 8rem;
 }
 
-#restartButton {
+#button-and-info {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
+#restartButton {
+    margin-right: 20px;
+}
+
 #winLose {
-    margin: auto;
     text-align: center;
     font-size: 6rem;
+    flex-grow: 1;
+    margin-right: 200px;
 }
