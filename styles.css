@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #1F2937;
+    color: aliceblue;
+}
+
+#statsDiv {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    font-size: 4rem;
+}
+
+#RPS-Buttons {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin: 0 10px;
+    font-size: 8rem;
+}
+
+#restartButton {
+    display: flex;
+    justify-content: center;
+}
+
+#winLose {
+    margin: auto;
+    text-align: center;
+    font-size: 6rem;
+}
