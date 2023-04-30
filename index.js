@@ -34,51 +34,46 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  // returns 0 if player wins
-  // returns 1 if computer wins
-  // returns 2 if tie
   if (playerSelection === computerSelection) {
-    return 2;
-  } else if (playerSelection == "rock" && computerSelection == "paper") {
-    return 1;
-  } else if (playerSelection == "rock" && computerSelection == "scissor") {
-    return 0;
-  } else if (playerSelection == "paper" && computerSelection == "rock") {
-    return 0;
-  } else if (playerSelection == "paper" && computerSelection == "scissor") {
-    return 1;
-  } else if (playerSelection == "scissor" && computerSelection == "rock") {
-    return 1;
-  } else if (playerSelection == "scissor" && computerSelection == "paper") {
-    return 0;
+    return 2; // Tie
+  } else if (
+    (playerSelection === "rock" && computerSelection === "scissor") ||
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "scissor" && computerSelection === "paper")
+  ) {
+    return 0; // Player wins
   }
+
+  return 1; // Computer wins
 }
 
 function game(choice) {
-  playerSelection = choice;
+  let playerSelection = choice;
   if (roundsPlayed < maxRounds) {
-    computerSelection = computerPlay();
-    result = playRound(playerSelection, computerSelection);
+    let computerSelection = computerPlay();
+    let result = playRound(playerSelection, computerSelection);
 
     // display result
-    if (result == 0) {
-      document.getElementById("winLose").innerHTML =
-        playerSelection + " beats " + computerSelection;
-      console.log("P: " + playerScore + " | C: " + computerScore);
-      playerScore++;
-    } else if (result == 1) {
-      document.getElementById("winLose").innerHTML =
-        computerSelection + " beats " + playerSelection;
-      console.log("P: " + playerScore + " | C: " + computerScore);
-      computerScore++;
-    } else {
-      document.getElementById("winLose").innerHTML =
-        computerSelection + " = " + playerSelection;
-      console.log("P: " + playerScore + " | C: " + computerScore);
-      tieScore++;
+    switch (result) {
+      case 0:
+        document.getElementById("winLose").innerHTML =
+          playerSelection + " beats " + computerSelection;
+        playerScore++;
+        break;
+      case 1:
+        document.getElementById("winLose").innerHTML =
+          computerSelection + " beats " + playerSelection;
+        computerScore++;
+        break;
+      default:
+        document.getElementById("winLose").innerHTML =
+          computerSelection + " = " + playerSelection;
+        tieScore++;
     }
+
     roundsPlayed++;
   }
+
   if (roundsPlayed >= maxRounds) {
     if (playerScore > computerScore) {
       document.getElementById("winLose").innerHTML = "You WIN!🥳";
@@ -86,16 +81,15 @@ function game(choice) {
     } else if (playerScore < computerScore) {
       document.getElementById("winLose").innerHTML = "You LOSE!😒";
       document.getElementById("winLose").style.color = "red";
-    } else if (playerScore == computerScore)
+    } else {
       document.getElementById("winLose").innerHTML = "You TIED!";
-    else
-      document.getElementById("winLose").innerHTML =
-        "ERROR! P: " + +playerScore + " | C: " + computerScore;
+    }
 
     document.getElementById("rockButton").disabled = true;
     document.getElementById("paperButton").disabled = true;
     document.getElementById("scissorsButton").disabled = true;
   }
+
   const stats =
     "Round: " +
     roundsPlayed +
@@ -105,6 +99,7 @@ function game(choice) {
     computerScore +
     "<br> Ties: " +
     tieScore;
+
   document.getElementById("statsDiv").innerHTML = stats;
 }
 
